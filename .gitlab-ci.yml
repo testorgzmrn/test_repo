@@ -8,7 +8,7 @@ deploy_to_github:
     - git config --global user.name "Zamarin-Aleksey"
     - git remote add github "https://Zamarin-Aleksey:${GITHUB_TOKEN}@github.com/testorgzmrn/test_repo.git"
     - git fetch github
-    - git checkout main
+    - git checkout -b main --track github/main
     - git push github main
   only:
     - main
