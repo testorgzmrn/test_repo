@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy_to_github:
+  stage: deploy
+  when: manual
+  script:
+    - git config --global user.email "zamarin2202200315@gmail.com"
+    - git config --global user.name "Zamarin-Aleksey"
+    - git remote add github "https://Zamarin-Aleksey:${GITHUB_TOKEN}@https://github.com/testorgzmrn/test_repo.git"
+    - git push github master
