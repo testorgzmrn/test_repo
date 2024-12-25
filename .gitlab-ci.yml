@@ -2,17 +2,15 @@ stages:
   - mirror
 
 variables:
-  GIT_STRATEGY: fetch
+  GIT_STRATEGY: none
 
 before_script:
   - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
   - chmod 600 ~/.ssh/id_ed25519
-  - eval $(ssh-agent -s)
-  - ssh-add ~/.ssh/id_ed25519
 
 mirror_job:
   stage: mirror
   script:
     - git remote add github git@github.com:testorgzmrn/test_repo.git
-    - git push --mirror github
+    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no' git push --mirror github
